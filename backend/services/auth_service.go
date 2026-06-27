@@ -117,15 +117,14 @@ type Claims struct {
     jwt.RegisteredClaims
 }
 
-// generateToken creates and signs a new JWT
 func (s *AuthService) generateToken(userID uint, role string) (string, error) {
     claims := Claims{
         UserID: userID,
         Role:   role,
         RegisteredClaims: jwt.RegisteredClaims{
-            // ExpiresAt is when the token expires
+            
             ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(s.jwtExpiry) * time.Hour)),
-            // IssuedAt is when the token was created
+       
             IssuedAt:  jwt.NewNumericDate(time.Now()),
         },
     }
